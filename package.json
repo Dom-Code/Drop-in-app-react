@@ -2,7 +2,7 @@
   "name": "drop-in-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://dom-code.github.io",
+  "homepage": "https://dom-code.github.io/Drop-in-app/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
