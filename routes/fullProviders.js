@@ -6,6 +6,3 @@ const getFullProviders = require('../controllers/fullProvidersController');
 router.get('', getFullProviders);
 
 module.exports = router;
-
-
-

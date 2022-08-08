@@ -87,4 +87,24 @@ module.exports = class PgPersistence {
     }
     return null;
   }
+
+  async searchBlackList(refreshToken) {
+    const query = `SELECT * FROM blacklist_refresh_tokens WHERE refresh_token = '${refreshToken}'`;
+
+    const result = await dbQuery(query);
+    if (result.rowCount > 0) {
+      return result.rows;
+    }
+    return null;
+  }
+
+  async addToBlackList(refreshToken) {
+    const query = `INSERT INTO blacklist_refresh_tokens (refresh_token) 
+    VALUES('${refreshToken}')`;
+    const result = await dbQuery(query);
+    if (result.rowCount > 0) {
+      return result.rows;
+    }
+    return null;
+  }
 };

@@ -26,3 +26,8 @@ CREATE TABLE current_users (
   refresh_token varchar(200)
 );
 
+CREATE TABLE blacklist_refresh_tokens (
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  refresh_token varchar(200),
+  blacklisted_on TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
