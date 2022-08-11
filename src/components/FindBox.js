@@ -1,8 +1,27 @@
-/* eslint-disable jsx-a11y/label-has-associated-control, react/jsx-filename-extension */
-import React from 'react';
-import './findBox.css';
+import React, { useContext, useEffect } from 'react';
+import '../component-css/findBox.css';
+// import { useProviders } from './Contexts/ProvidersContext';
+import ProvidersContext from './Contexts/ProvidersContext';
+// import { TextProvider } from './Contexts/textProvider';
+import { useText } from './Contexts/textProvider';
 
-function FindBox({ newSearch }) {
+function FindBox(props) {
+
+  const {text, changeText} = useText();
+
+
+  function newSearch(event) {
+    if (event.key) {
+      changeText(text.slice(0, text.length - 1));
+    } else {
+      changeText(event.target.value);
+    }
+  }
+
+  useEffect(() => {
+    // console.log(text)
+  }, [text])
+
   return (
     <form id="findbox-form">
       <div>
@@ -12,9 +31,8 @@ function FindBox({ newSearch }) {
             onChange={(event) => newSearch(event)}
             onKeyDown={(event) => {
               if (event.key === 'Backspace') {
-                return newSearch(event);
+                newSearch(event);
               }
-              return null;
             }}
             id="user-input"
           />

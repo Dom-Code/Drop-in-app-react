@@ -1,82 +1,143 @@
 import React, { useState, useEffect } from 'react';
-import persons from '../seed-data';
 import Nav from './Nav';
 import Home from './Home';
 import How from './How';
 import Footer from './Footer';
 import Search from './Search';
 import Login from './Login';
-import ErrorBoundary from './ErrorBoundary';
+import CreateUser from './createUser';
+import Account from './Account'
+import { useText}  from './Contexts/textProvider'
+import axios from '../api/axios'
+import ProvidersContext from './Contexts/ProvidersContext'
+import '../component-css/main.css'
+
 
 function Main() {
   const [currentWindow, changeWindow] = useState('Home');
-  const [providers, changeProviders] = useState(persons);
-  const [text, changeText] = useState('');
+  const [providers, changeProviders] = useState([]);
+  const [prevList, setPrevList] = useState([]);
+  const {text, changeText} = useText()
 
+  
   function switchView(event) {
-    const windowName = event.target.title;
-    changeWindow(windowName);
+    event.preventDefault()
+    let windowName = event.target.title;
+
+    if (windowName === currentWindow) {
+      changeWindow(currentWindow);
+    } else {
+      changeWindow(windowName);
+    }
+    const userInput = document.querySelector('#user-input');
+    if (userInput) {
+      userInput.value = '';
+    }
+    changeText('');
+    changeProviders(prevList);
   }
 
-  function getProviders() {
-    const lowerText = text.toLowerCase();
-    // console.log(providers);
-    const filteredList = providers.filter((p) => {
-      if (p.specialty.toLowerCase().includes(lowerText)
-      || p.name.toLowerCase().includes(lowerText)) {
-        return true;
+  /*
+    We have created the state 'currentWindow' and assigned it to 'Home' to start,
+    since our starting page will be the home page.
+
+    The switchView function will extract the title of the window from the event 
+    passed to it and assign it to the variable windowName.
+
+      If the the windowName(the window user has clicked) is already the current window,
+      we then change the state to currentWindow to simulate a refresh.
+
+      If the windowName and currentWindow are not the same, the state of currentWindow
+      is changed to windowName
+  */
+
+  async function fetchProviders() {
+      try { 
+        const response = await axios.get(
+          '/api/partial-providers',
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        )
+        setPrevList(response.data)
+        changeProviders(response.data)
+        
+      } catch (err) {
+        console.log(err)
       }
-      return false
-    });
-    if (text.length > 0) {
-      changeProviders(filteredList);
-    } else {
-      changeProviders(persons);
-    }
   }
 
-  const changeInput = (event) => {
-    if (event.key) {
-      changeProviders(persons);
-      changeText(event.target.value);
-    } else {
-      changeText(event.target.value);
-    }
-  };
+  /*
+    After fetching the the partial providers, we assign the array to the state providers.
+    We also assign it to 'setPrevList' which will store the provider list. We can refer 
+    back to this list when the providers state is changed and we want to the original list. 
+    This prevents us from sending several GET requests when searching through providers. 
+  */
 
   function showView() {
     switch (currentWindow) {
       case 'Home':
-        return <Home />;
+        return <Home click={(event) => switchView(event)} />;
       case 'How':
         return <How />;
       case 'Search':
-        return <Search persons={providers} newSearch={(event) => changeInput(event)} />;
+        return (
+          <ProvidersContext.Provider value={{
+            providers, changeProviders, text, changeText,
+          }}>
+            <Search click={(event) => switchView(event)}/>
+          </ProvidersContext.Provider>
+        );
+      case 'Account': 
+          return <Account click={(event) => switchView(event)}/>
       case 'Login':
-        return <Login />;
+        return <Login click={(event) => switchView(event)}/>;
+      case 'CreateUser': 
+        return <CreateUser click={(event) => switchView(event)}/>
       default:
     }
   }
 
-  useEffect(() => {
-    getProviders();
-    // console.log(providers);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text]);
+  // showView modifies view and passes information to Search component(providers and search event)
 
-  // useEffect(() => {
-  //   // console.log(providers);
-  // }, [providers]);
+
+  useEffect(() => {
+    fetchProviders();
+  }, []);
+
+  // partial information about providers are fetched at start
+
+
+  useEffect(() => {
+    const lowerText = text.toLowerCase();
+    if (lowerText.length === 0) {
+      changeProviders(prevList);
+    } else {
+        changeProviders(prevList.filter((p) => {
+          if (p.specialty.toLowerCase().includes(lowerText)
+          || p.first_name.toLowerCase().includes(lowerText)
+          || p.last_name.toLowerCase().includes(lowerText)) {
+            return true;
+          }
+      }));
+    }
+  }, [text, prevList]);
+
+  /*
+    After each input in the text box, providers state is updated. 
+  */
 
   return (
     <div id="main">
       <div id="nav-container">
         <Nav click={(event) => switchView(event)} />
       </div>
-      <div id="content" className="tc">
-        <ErrorBoundary>
-          {showView()}
-        </ErrorBoundary>
+      <div id="content" className="">
+        <div id='scroll'>
+            {showView()}
+        </div>
       </div>
       <div id="footer-container">
         <Footer />

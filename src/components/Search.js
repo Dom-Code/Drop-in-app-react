@@ -4,18 +4,19 @@ import Provider from './Provider';
 import Scroll from './Scroll';
 import FindBox from './FindBox';
 
-function Search(props) {
-  const { persons } = props;
-  const { newSearch } = props;
+const Search = ({ click }) => {
+
   return (
     <div>
       <h2>View our trusted providers</h2>
-      <FindBox newSearch={(event) => newSearch(event)} />
+      <FindBox />
       <Scroll>
-        {persons.map((person) => <div className="di" key={person.id}><Provider name={person.name} specialty={person.specialty} /></div>)}
+        <Provider click={click}/>
       </Scroll>
     </div>
   );
 }
+
+// click will capture the target provider and send back to main.js.
 
 export default Search;

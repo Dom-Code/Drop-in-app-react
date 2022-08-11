@@ -1,23 +1,68 @@
-/* eslint-disable react/destructuring-assignment, react/jsx-filename-extension */
-import React from 'react';
-import doc from '../doc.jpg';
+import React, { useContext, useState } from 'react';
+import doc from '../images/doc.png';
+import ProvidersContext from './Contexts/ProvidersContext';
+import DisplayProviders from './DisplayProviders';
+import '../component-css/providers.css';
 
-function Provider(person) {
-  const styles = {
-    marginTop: '20px',
-    height: 'auto',
-    width: '200px',
-  };
+const Provider = ({click}) => {
+  const { providers } = useContext(ProvidersContext);
+  const [cardVisibility, setCardVisibility] = useState(false);
+  const [currentProvider, setCurrentProvider] = useState('');
+
+  const providerClick = (e) => {
+    e.preventDefault();
+    let providerId = e.target.closest('section').getAttribute('id')
+   
+
+    let data = providers.filter(provider => {
+      return provider.id === providerId
+    })[0];
+
+    setCurrentProvider(data);
+    setCardVisibility(true);
+  }
+
+  // providerClick uses the event passed after the user clicks on a provider.
+  // The id is used to locate the provider in the providers array. 
+
+  const hideCard = (e) => {
+    if (e.target.id === 'modal-wall') {
+      setCardVisibility(false)
+      setCurrentProvider('')
+    }
+  }
+
+  /*
+    hideCard will be invoked when the user clicks on the modal-wall, which is on the outside 
+    of the provider card. The card is hidden and the current provider variable is set to 
+    and empty string.
+  */
 
   return (
-    <div key={person.id} className="bg-light-blue dib br3 pa3 ma2 grow tc bw2 shadow-5" style={styles}>
-      <img alt="provider" src={doc} />
-      <div>
-        <h3>{person.name}</h3>
-        <p>{person.specialty}</p>
+    <div>
+      <div id='modal-wall'
+        className={ cardVisibility ? 'show' : 'offscreen' }
+        onClick={e => hideCard(e)}>
+        <div id='card-box'>
+          <h3>{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</h3>
+          <img alt="provider" src={doc} />
+          <div id='provider_data'>
+            <p>Office Location: {currentProvider.city}</p>
+            <p>Specialty: {currentProvider.specialty}</p>
+            <p><a id="signin" title="Login" href="/" onClick={click} >Sign in</a> or <a id="create" href="/" title="CreateUser" onClick={click}>Create an Account</a> to contact this provider</p>
+          </div>
+        </div>
       </div>
+      <DisplayProviders click={providerClick}/> 
     </div>
-  );
+  )
 }
+
+/* 
+  the className for the modal-wall element by default is set to offscreen, hiding the modal.
+  When the user clicks on a provider, the className for modal wall will be set to 'show', 
+  and bring the modal-wall element to the front of the app. 
+  
+*/ 
 
 export default Provider;

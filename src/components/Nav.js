@@ -1,5 +1,5 @@
 import React from 'react';
-import './nav.css';
+import '../component-css/main.css';
 
 function Nav({ click }) {
   return (
@@ -11,12 +11,16 @@ function Nav({ click }) {
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Home" onClick={click}>Home</p>
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="How" onClick={click}>How it Works</p>
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Search" onClick={click}>Search Providers</p>
-        <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Login" onClick={click}>Login/Create Account</p>
-        {/* <a class="link dim dark-gray f6 f5-l dib" href="#" title="Contact">Contact</a> */}
+        <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Account" onClick={click}>Account</p>
       </div>
     </nav>
   );
 }
+
+/*
+  The Nav component has several onClicks that capture the click event and passes it back to 
+  main.js. main.js will then take that info and adjust accordingly. 
+*/
 
 export default Nav;
 

@@ -14,7 +14,7 @@ function How() {
         code and contact information for your provider. You then will contact
         the provider and set up an appointment. If you are satisfied with the
         date and time of your appointment, provide the provider with the code.
-        {' '}
+
 
       </p>
     </div>
