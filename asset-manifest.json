@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Drop-in-app-react/static/css/main.45f5e2f2.css",
+    "main.js": "/Drop-in-app-react/static/js/main.d0173ec1.js",
+    "index.html": "/Drop-in-app-react/index.html",
+    "main.45f5e2f2.css.map": "/Drop-in-app-react/static/css/main.45f5e2f2.css.map",
+    "main.d0173ec1.js.map": "/Drop-in-app-react/static/js/main.d0173ec1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.45f5e2f2.css",
+    "static/js/main.d0173ec1.js"
+  ]
+}
