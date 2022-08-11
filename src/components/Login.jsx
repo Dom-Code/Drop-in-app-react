@@ -42,7 +42,7 @@ function Login({onClick}) {
       setEmail('');
       setPw('');
       setSuccess(true);
-      navigate("/user")
+      navigate("/Drop-in-app-react/user")
     } catch(err) {
       if (!err.response) {
         setErrMsg('No Server Response');

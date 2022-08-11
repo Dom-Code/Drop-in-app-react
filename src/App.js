@@ -8,7 +8,7 @@ function App() {
   return (
     <Routes>
       <Route path='/Drop-in-app-react' element={<Main/>}/>
-      <Route path='/user' element={<VerifiedMain/>}/>
+      <Route path='/Drop-in-app-react/user' element={<VerifiedMain/>}/>
     </Routes>
   );
 }
