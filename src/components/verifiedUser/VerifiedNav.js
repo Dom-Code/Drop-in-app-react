@@ -19,7 +19,7 @@ function Nav({ click }) {
   
       localStorage.removeItem('accessToken')
       localStorage.removeItem('refreshToken')
-      navigate('/#')
+      navigate('/Drop-in-app-react')
   
     } catch(err) {
       console.log(err)

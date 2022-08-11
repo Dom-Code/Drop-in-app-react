@@ -11,7 +11,7 @@ import { useText}  from './Contexts/textProvider'
 import axios from '../api/axios'
 import ProvidersContext from './Contexts/ProvidersContext'
 import '../component-css/main.css'
-import Spinner from 'react-bootstrap/esm/Spinner';
+import Spinner from './Spinner'
 
 
 function Main() {
@@ -66,7 +66,7 @@ function Main() {
         )
         setPrevList(response.data)
         changeProviders(response.data)
-        setLoading(true)
+        // setLoading(true)
         
       } catch (err) {
         console.log(err)
@@ -133,17 +133,17 @@ function Main() {
     After each input in the text box, providers state is updated. 
   */
 
+  useEffect(() => {
+    setLoading(true)
+  }, [providers])
+
   return (
     <div id="main">
       <div id="nav-container">
         <Nav click={(event) => switchView(event)} />
       </div>
-      <div id="content" className="">
-        <div id='scroll'>
-          <div id="content" className="tc">
-            {loading ? showView() : <Spinner/>}
-          </div>
-        </div>
+      <div id="content" className="tc">
+        {loading ? showView() : <Spinner/>}
       </div>
       <div id="footer-container">
         <Footer />
