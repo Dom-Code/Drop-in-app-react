@@ -55,3 +55,19 @@ a.disabled {
   color: lightblue;
   filter: brightness(200%)
 }
+
+#provider-name-all-cards {
+  padding-left: auto;
+  padding-right: auto;
+  font-size: 1em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+#all-providers {
+  padding-top: 10%;
+}
+
+.provider-data-all-cards {
+  font-size: .9em;
+}
