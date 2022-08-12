@@ -1,7 +1,7 @@
 nav {
-  width: 100%;
-  top: 0;
-  position: fixed;
+  top: 10px;
+  text-align: center;
+  padding-top: 10px;
 }
 
 #nav-container {
@@ -9,4 +9,14 @@ nav {
   height: 100px;
   margin-bottom: 30px;
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+#all-nav-items {
+
+}
+
+/* db dt-l w-100 border-box pa3 ph5-l" */
+
+/* db dtc-l v-mid w-100 w-75-l tc tr-l */

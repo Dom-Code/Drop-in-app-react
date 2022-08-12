@@ -2,7 +2,7 @@ import React from 'react';
 
 function How() {
   return (
-    <div>
+    <div id="how-it-works">
       <h2>How this works</h2>
       <p>
         Drop-in is a premium service that will connect you to a highly

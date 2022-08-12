@@ -64,10 +64,11 @@ function Main() {
             },
           }
         )
-        setPrevList(response.data)
-        changeProviders(response.data)
-        // setLoading(true)
-        
+        if (response.data) {
+          setLoading(true)
+          setPrevList(response.data)
+          changeProviders(response.data)
+        }        
       } catch (err) {
         console.log(err)
       }
@@ -132,10 +133,6 @@ function Main() {
   /*
     After each input in the text box, providers state is updated. 
   */
-
-  useEffect(() => {
-    setLoading(true)
-  }, [providers])
 
   return (
     <div id="main">

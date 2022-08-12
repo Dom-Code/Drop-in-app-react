@@ -5,11 +5,6 @@
   position: relative;
 }
 
-#nav-container {
-  display: inline-block;
-  position: absolute;
-  margin-bottom: 10px;
-}
 
 #content {
   text-align: center;
@@ -40,9 +35,9 @@
   height: 10%;
   width: 100%;
   text-align: center;
-
-  /* background-color: red; */
-
 }
 
-/* // db dtc-l v-mid mid-gray link dim w-100 w-25-l tc tl-l mb2 mb0-l */
+#how-it-works {
+  margin-left: 5%;
+  margin-right: 5%;
+}
