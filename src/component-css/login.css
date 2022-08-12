@@ -1,4 +1,4 @@
-.button {
+/* .button {
   color:#f8f8ff;
   border-style: solid;
   border-radius: 7px;
@@ -14,10 +14,10 @@
   margin-top: 2rem;
   text-transform: uppercase;
   background-color: #355c7d;
-}
+} */
 
 .button:hover {
-  color:white;
+  color:blue;
   opacity: .7;
   transition: color .15s ease-in;
 }

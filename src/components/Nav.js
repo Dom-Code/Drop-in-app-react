@@ -7,7 +7,7 @@ function Nav({ click }) {
       <a className="db dtc-c v-mid mid-gray link dim w-100 w-25-l tc tl-c mb2 mb0-l" href="/#" title="Home">
         <img src="http://tachyons.io/img/logo.jpg" className="dib w2 h2 br-100" alt="Site Name" />
       </a>
-      <div id="all-nav-items" className="">
+      <div id="all-nav-items">
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Home" onClick={click}>Home</p>
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="How" onClick={click}>How it Works</p>
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Search" onClick={click}>Search Providers</p>

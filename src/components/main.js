@@ -5,7 +5,7 @@ import How from './How';
 import Footer from './Footer';
 import Search from './Search';
 import Login from './Login';
-import CreateUser from './createUser';
+import CreateUser from './CreateUser';
 import Account from './Account'
 import { useText}  from './Contexts/textProvider'
 import axios from '../api/axios'

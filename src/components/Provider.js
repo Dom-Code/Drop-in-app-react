@@ -46,10 +46,10 @@ const Provider = ({click}) => {
         <div id='card-box'>
           <h3>{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</h3>
           <img alt="provider" src={doc} />
-          <div id='provider_data'>
-            <p>Office Location: {currentProvider.city}</p>
+          <div id='provider_data' className='tl pa4'>
+            <p>Location: {currentProvider.city}</p>
             <p>Specialty: {currentProvider.specialty}</p>
-            <p><a id="signin" title="Login" href="/" onClick={click} >Sign in</a> or <a id="create" href="/" title="CreateUser" onClick={click}>Create an Account</a> to contact this provider</p>
+            <p><a className='display-links' title="Login" href="/" onClick={click} >Sign in</a> or <a className="display-links" id="create" href="/" title="CreateUser" onClick={click}>Create an Account</a> to contact this provider</p>
           </div>
         </div>
       </div>

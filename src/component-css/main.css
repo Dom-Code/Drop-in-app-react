@@ -41,3 +41,17 @@
   margin-left: 5%;
   margin-right: 5%;
 }
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.display-links {
+  color: #CDECFF;
+}
+
+.display-links:hover {
+  color: lightblue;
+  filter: brightness(200%)
+}
