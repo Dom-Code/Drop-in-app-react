@@ -2,7 +2,7 @@ import {useRef, useState, useEffect} from 'react'
 import '../component-css/createUser.css'
 import axios from '../api/axios';
 
-function CreateUser({onClick}) {
+function CreateUser({click}) {
   const userRef = useRef();
   const errRef = useRef();
 
@@ -119,7 +119,7 @@ function CreateUser({onClick}) {
       {errMsg}
       </p>
       <div className="pa0 black-8">
-        <form className="measure center" onSubmit={submitUser}>
+        <form className="measure center pa4" onSubmit={submitUser}>
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
             <h2>Sign up</h2>
             <div className="mb2">
@@ -257,9 +257,9 @@ function CreateUser({onClick}) {
             </div>
           </fieldset>
         </form>
-        <div className="mt0">
+        <div className="">
           <p id="login-options" className="f6 black dib">Already Have an account?</p>
-          <a id="login-option-link" href="/#" className="f6 link dib pl1" onClick={onClick}>Sign in</a>
+          <a id="login-option-link" title="Login" href="/#" className="f6 blue underline link dib pl1 hover-light-blue" onClick={click}>Sign in</a>
         </div>
       </div>
     </section>
@@ -269,3 +269,4 @@ function CreateUser({onClick}) {
 }
 
 export default CreateUser;
+

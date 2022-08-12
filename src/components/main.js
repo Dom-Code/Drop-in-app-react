@@ -5,12 +5,13 @@ import How from './How';
 import Footer from './Footer';
 import Search from './Search';
 import Login from './Login';
-import CreateUser from './createUser';
+import CreateUser from './CreateUser';
 import Account from './Account'
 import { useText}  from './Contexts/textProvider'
 import axios from '../api/axios'
 import ProvidersContext from './Contexts/ProvidersContext'
 import '../component-css/main.css'
+import Spinner from './Spinner'
 
 
 function Main() {
@@ -18,6 +19,8 @@ function Main() {
   const [providers, changeProviders] = useState([]);
   const [prevList, setPrevList] = useState([]);
   const {text, changeText} = useText()
+  const [loading, setLoading] = useState(false);
+
 
   
   function switchView(event) {
@@ -61,9 +64,11 @@ function Main() {
             },
           }
         )
-        setPrevList(response.data)
-        changeProviders(response.data)
-        
+        if (response.data) {
+          setLoading(true)
+          setPrevList(response.data)
+          changeProviders(response.data)
+        }        
       } catch (err) {
         console.log(err)
       }
@@ -134,10 +139,8 @@ function Main() {
       <div id="nav-container">
         <Nav click={(event) => switchView(event)} />
       </div>
-      <div id="content" className="">
-        <div id='scroll'>
-            {showView()}
-        </div>
+      <div id="content" className="tc">
+        {loading ? showView() : <Spinner/>}
       </div>
       <div id="footer-container">
         <Footer />

@@ -4,7 +4,7 @@ import axios from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 const LOGIN_URL = '/api/auth';
 
-function Login({onClick}) {
+function Login({click}) {
   const userRef = useRef();
   const errRef = useRef();
 
@@ -68,10 +68,10 @@ function Login({onClick}) {
           aria-live='assertive'>
           {errMsg}
         </p>
-        <div className="pa0 black-8" id="signin-view">
+        <div className="pa4 black-8 measure center" id="signin-view">
           <div id="sign_in" className="ba b--transparent ph0 mh0">
             <h2>Log in</h2>
-            <form className="measure center" onSubmit={LogInUser} noValidate>
+            <form onSubmit={LogInUser} noValidate>
               <div className="mb2">
                 <label className="db fw6 lh-copy f6 tl" htmlFor="email">Email</label>
                 <input
@@ -100,12 +100,10 @@ function Login({onClick}) {
                 <button className="button" type="submit" value="Sign in">Sign in</button>
               </div>
             </form>
-            <div className=" mt0 tl">
-              <p className="f6 black db">
-                Dont have an account yet?
-                <a href="/#" className="link" onClick={onClick}>Sign up</a>
-              </p>
-              <a href="/#" className="f6 link dim black db">Forgot your password?</a>
+            <div className="mt0 tl">
+              <div className="f6 black db">
+                Dont have an account yet? <a href="/#" title="CreateUser" className="sign-in-link hover-light-blue" onClick={click}>Sign up</a>
+              </div>
             </div>
           </div>
         </div>
