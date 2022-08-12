@@ -46,7 +46,7 @@ function Nav({ click }) {
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Home" onClick={click}>Home</p>
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="How" onClick={click}>How it Works</p>
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Search" onClick={click}>Search Providers</p>
-        <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Account" onClick={click}>Account</p>
+        <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Logout" onClick={logout}>Logout</p>
       </div>
     </nav>
   );
