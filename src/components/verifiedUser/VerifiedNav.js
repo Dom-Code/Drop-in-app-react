@@ -39,7 +39,7 @@ function Nav({ click }) {
   
   return (
     <nav>
-      <a className="db dtc-c v-mid mid-gray link dim w-100 w-25-l tc tl-c mb2 mb0-l" href="/#" title="Home">
+      <a className="db dtc-c v-mid mid-gray link dim w-100 w-25-l tc tl-c mb2 mb0-l" href="/drop-in-app-react/user" title="Home">
         <img src="http://tachyons.io/img/logo.jpg" className="dib w2 h2 br-100" alt="Site Name" />
       </a>
       <div id="all-nav-items">
