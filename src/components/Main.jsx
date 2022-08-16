@@ -6,26 +6,23 @@ import Footer from './Footer';
 import Search from './Search';
 import Login from './Login';
 import CreateUser from './CreateUser';
-import Account from './Account'
-import { useText}  from './Contexts/textProvider'
-import axios from '../api/axios'
-import ProvidersContext from './Contexts/ProvidersContext'
-import '../component-css/main.css'
-import Spinner from './Spinner'
-
+import Account from './Account';
+import { useText } from './Contexts/textProvider';
+import axios from '../api/axios';
+import ProvidersContext from './Contexts/ProvidersContext';
+import '../component-css/main.css';
+import Spinner from './Spinner';
 
 function Main() {
   const [currentWindow, changeWindow] = useState('Home');
   const [providers, changeProviders] = useState([]);
   const [prevList, setPrevList] = useState([]);
-  const {text, changeText} = useText()
+  const { text, changeText } = useText();
   const [loading, setLoading] = useState(false);
 
-
-  
   function switchView(event) {
-    event.preventDefault()
-    let windowName = event.target.title;
+    event.preventDefault();
+    const windowName = event.target.title;
 
     if (windowName === currentWindow) {
       changeWindow(currentWindow);
@@ -44,7 +41,7 @@ function Main() {
     We have created the state 'currentWindow' and assigned it to 'Home' to start,
     since our starting page will be the home page.
 
-    The switchView function will extract the title of the window from the event 
+    The switchView function will extract the title of the window from the event
     passed to it and assign it to the variable windowName.
 
       If the the windowName(the window user has clicked) is already the current window,
@@ -55,32 +52,33 @@ function Main() {
   */
 
   async function fetchProviders() {
-      try { 
-        const response = await axios.get(
-          '/api/partial-providers',
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        )
-        if (response.data) {
-          setLoading(true)
-          setPrevList(response.data)
-          changeProviders(response.data)
-        }        
-      } catch (err) {
-        console.log(err)
+    try {
+      const response = await axios.get(
+        '/api/partial-providers',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      if (response.data) {
+        setLoading(true);
+        setPrevList(response.data);
+        changeProviders(response.data);
       }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   /*
     After fetching the the partial providers, we assign the array to the state providers.
-    We also assign it to 'setPrevList' which will store the provider list. We can refer 
-    back to this list when the providers state is changed and we want to the original list. 
-    This prevents us from sending several GET requests when searching through providers. 
+    We also assign it to 'setPrevList' which will store the provider list. We can refer
+    back to this list when the providers state is changed and we want to the original list.
+    This prevents us from sending several GET requests when searching through providers.
   */
 
+  // eslint-disable-next-line consistent-return
   function showView() {
     switch (currentWindow) {
       case 'Home':
@@ -91,22 +89,22 @@ function Main() {
         return (
           <ProvidersContext.Provider value={{
             providers, changeProviders, text, changeText,
-          }}>
-            <Search click={(event) => switchView(event)}/>
+          }}
+          >
+            <Search click={(event) => switchView(event)} />
           </ProvidersContext.Provider>
         );
-      case 'Account': 
-          return <Account click={(event) => switchView(event)}/>
+      case 'Account':
+        return <Account click={(event) => switchView(event)} />;
       case 'Login':
-        return <Login click={(event) => switchView(event)}/>;
-      case 'CreateUser': 
-        return <CreateUser click={(event) => switchView(event)}/>
+        return <Login click={(event) => switchView(event)} />;
+      case 'CreateUser':
+        return <CreateUser click={(event) => switchView(event)} />;
       default:
     }
   }
 
   // showView modifies view and passes information to Search component(providers and search event)
-
 
   useEffect(() => {
     fetchProviders();
@@ -114,24 +112,24 @@ function Main() {
 
   // partial information about providers are fetched at start
 
-
   useEffect(() => {
     const lowerText = text.toLowerCase();
     if (lowerText.length === 0) {
       changeProviders(prevList);
     } else {
-        changeProviders(prevList.filter((p) => {
-          if (p.specialty.toLowerCase().includes(lowerText)
+      // eslint-disable-next-line array-callback-return, consistent-return
+      changeProviders(prevList.filter((p) => {
+        if (p.specialty.toLowerCase().includes(lowerText)
           || p.first_name.toLowerCase().includes(lowerText)
           || p.last_name.toLowerCase().includes(lowerText)) {
-            return true;
-          }
+          return true;
+        }
       }));
     }
   }, [text, prevList]);
 
   /*
-    After each input in the text box, providers state is updated. 
+    After each input in the text box, providers state is updated.
   */
 
   return (
@@ -141,10 +139,10 @@ function Main() {
           <Nav click={(event) => switchView(event)} />
         </div>
         <div id="content" className="tc">
-          {loading ? showView() : <Spinner/>}
+          {loading ? showView() : <Spinner />}
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

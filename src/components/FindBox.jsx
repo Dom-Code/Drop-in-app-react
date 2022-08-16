@@ -1,14 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import '../component-css/findBox.css';
-// import { useProviders } from './Contexts/ProvidersContext';
-import ProvidersContext from './Contexts/ProvidersContext';
-// import { TextProvider } from './Contexts/textProvider';
+
 import { useText } from './Contexts/textProvider';
 
 function FindBox(props) {
-
-  const {text, changeText} = useText();
-
+  const { text, changeText } = useText();
 
   function newSearch(event) {
     if (event.key) {
@@ -18,11 +14,13 @@ function FindBox(props) {
     }
   }
 
-
   return (
-    <form id="findbox-form" onSubmit={(event) => {
-      event.preventDefault()
-    }}>
+    <form
+      id="findbox-form"
+      onSubmit={(event) => {
+        event.preventDefault();
+      }}
+    >
       <div>
         <label htmlFor="user-input">
           Search:

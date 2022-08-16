@@ -1,21 +1,18 @@
+import React, { createContext, useState } from 'react';
 
-import React, {createContext, useContext, useState} from "react";
+const ProviderContext = createContext({});
 
-const ProviderContext = createContext({})
-
-export const ProviderFunc = ({children}) => {
+export function ProviderFunc({ children }) {
   const [providers, changeProviders] = useState();
 
-
   return (
-    <ProviderContext.Provider value={{providers, changeProviders}}>
+    <ProviderContext.Provider value={{ providers, changeProviders }}>
       {children}
     </ProviderContext.Provider>
-  )
+  );
 }
 
-export default ProviderContext
-
+export default ProviderContext;
 
 // const ProviderConsumer = ({children}) => {
 //   return (
@@ -29,7 +26,6 @@ export default ProviderContext
 //       </ProviderContext.Consumer>
 //   )
 // }
-
 
 // const useProviders = () => {
 //   const context = useContext(ProviderContext);

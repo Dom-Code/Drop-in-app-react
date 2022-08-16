@@ -1,10 +1,6 @@
-import { useContext } from "react";
-import ProviderFunc from "../Contexts/ProvidersContext";
+import { useContext } from 'react';
+import ProviderFunc from '../Contexts/ProvidersContext';
 
-
-const useProviders = () => {
-  return useContext(ProviderFunc)
-}
-
+const useProviders = () => useContext(ProviderFunc);
 
 export default useProviders;

@@ -18,8 +18,8 @@ function Nav({ click }) {
 }
 
 /*
-  The Nav component has several onClicks that capture the click event and passes it back to 
-  main.js. main.js will then take that info and adjust accordingly. 
+  The Nav component has several onClicks that capture the click event and passes it back to
+  main.js. main.js will then take that info and adjust accordingly.
 */
 
 export default Nav;

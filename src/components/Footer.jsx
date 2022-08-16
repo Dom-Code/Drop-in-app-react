@@ -9,9 +9,9 @@ function Footer() {
         ., All Rights Reserved
       </small>
       <div className="tc mt3">
-        <a href="" title="Language" className="f6 dib ph2 link mid-gray dim disabled">Language</a>
-        <a href="" title="Terms" className="f6 dib ph2 link mid-gray dim disabled">Terms of Use</a>
-        <a href="" title="Privacy" className="f6 dib ph2 link mid-gray dim">Privacy</a>
+        <a href="/" title="Language" className="f6 dib ph2 link mid-gray dim disabled">Language</a>
+        <a href="/" title="Terms" className="f6 dib ph2 link mid-gray dim disabled">Terms of Use</a>
+        <a href="/" title="Privacy" className="f6 dib ph2 link mid-gray dim">Privacy</a>
       </div>
     </footer>
   );

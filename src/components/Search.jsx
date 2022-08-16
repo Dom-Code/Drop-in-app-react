@@ -1,17 +1,15 @@
-/* eslint-disable max-len, react/jsx-filename-extension */
 import React from 'react';
 import Provider from './Provider';
 import Scroll from './Scroll';
 import FindBox from './FindBox';
 
-const Search = ({ click }) => {
-
+function Search({ click }) {
   return (
     <div>
       <h2>View our trusted providers</h2>
       <FindBox />
       <Scroll>
-        <Provider click={click}/>
+        <Provider click={click} />
       </Scroll>
     </div>
   );

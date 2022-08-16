@@ -1,12 +1,13 @@
 import axios from 'axios';
-const BASE_URL = 'https://drop-in-server.herokuapp.com'
+
+const BASE_URL = 'https://drop-in-server.herokuapp.com';
 
 export default axios.create({
   baseURL: BASE_URL,
 });
 
-export const axiosPrivate =  axios.create({
+export const axiosPrivate = axios.create({
   baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
-  // withCredentials: true 
+  // withCredentials: true
 });
