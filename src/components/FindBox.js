@@ -18,12 +18,11 @@ function FindBox(props) {
     }
   }
 
-  useEffect(() => {
-    // console.log(text)
-  }, [text])
 
   return (
-    <form id="findbox-form">
+    <form id="findbox-form" onSubmit={(event) => {
+      event.preventDefault()
+    }}>
       <div>
         <label htmlFor="user-input">
           Search:

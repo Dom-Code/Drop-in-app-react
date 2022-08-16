@@ -20,12 +20,12 @@ function DisplayProviders({click}) {
       onClick={click}
       >
       <img alt="provider" src={doc} />
-      <div>
-        <h3>
+      <div id="all-providers">
+        <p id="provider-name-all-cards">
           {`${person.first_name} ${person.last_name} MD`}
-        </h3>
-        <p>{person.specialty}</p>
-        <p>{person.city}</p>
+        </p>
+        <p className='provider-data-all-cards'>{person.specialty}</p>
+        <p className='provider-data-all-cards'>{person.city}</p>
       </div>
     </section>
   ));

@@ -135,17 +135,17 @@ function Main() {
   */
 
   return (
-    <div id="main">
-      <div id="nav-container">
-        <Nav click={(event) => switchView(event)} />
+    <>
+      <div id="main">
+        <div id="nav-container">
+          <Nav click={(event) => switchView(event)} />
+        </div>
+        <div id="content" className="tc">
+          {loading ? showView() : <Spinner/>}
+        </div>
       </div>
-      <div id="content" className="tc">
-        {loading ? showView() : <Spinner/>}
-      </div>
-      <div id="footer-container">
-        <Footer />
-      </div>
-    </div>
+      <Footer/>
+    </>
   );
 }
 
