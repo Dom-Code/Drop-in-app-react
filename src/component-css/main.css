@@ -2,22 +2,39 @@
 #main {
   width: 100vw;
   min-height: 100vh;
+  position: relative;
+  /* height: 100%; */
 }
 
 
 #content {
   text-align: center;
   position: relative;
-  padding-top: 2%;
   background-color: aliceblue;
+  padding-top: 3%;
 }
+
+nav {
+  top: 10px;
+  text-align: center;
+  padding-top: 10px;
+  background-color: white;
+}
+
+#nav-container {
+  display: block;
+  width: 100%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 #scroll {
   position: relative;
   overflow:scroll;
   overflow-x:hidden;
 }
-
 
 
 #footer-container {
@@ -62,4 +79,37 @@ a.disabled {
 
 .provider-data-all-cards {
   font-size: .9em;
+}
+
+#create {
+  margin-left: 5px;
+}
+
+.button {
+  border-radius: 6px;
+  color:#f8f8ff;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: none;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: .5rem;
+  margin-top: 2rem;
+  text-transform: uppercase;
+  background-color: #355c7d;
+}
+
+.button:hover {
+  color:white;
+  opacity: .7;
+  transition: color .15s ease-in;
+}
+
+
+#account-buttons {
+  margin-top: 12%;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import '../../component-css/nav.css';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
+import logo from '../../images/logo.png'
 
 function Nav({ click }) {
   const navigate = useNavigate();
@@ -37,8 +37,8 @@ function Nav({ click }) {
 
   return (
     <nav>
-      <a className="db dtc-c v-mid mid-gray link dim w-100 w-25-l tc tl-c mb2 mb0-l" href="/drop-in-app-react/user" title="Home">
-        <img src="http://tachyons.io/img/logo.jpg" className="dib w2 h2 br-100" alt="Site Name" />
+      <a className="db dtc-c v-mid mid-gray link dim w-100 w-25-l tc tl-c mb4 mb0-l" href="/drop-in-app-react/user" title="Home">
+        <img src={logo} className="dib w3 br-0" alt="Site Name" />
       </a>
       <div id="all-nav-items">
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Home" onClick={click}>Home</p>

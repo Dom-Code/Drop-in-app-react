@@ -78,7 +78,6 @@ function Main() {
     This prevents us from sending several GET requests when searching through providers.
   */
 
-  // eslint-disable-next-line consistent-return
   function showView() {
     switch (currentWindow) {
       case 'Home':

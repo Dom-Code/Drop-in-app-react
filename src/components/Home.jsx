@@ -1,5 +1,5 @@
 import React from 'react';
-import '../component-css/home.css';
+import '../component-css/main.css';
 
 function Home({ click }) {
   return (
