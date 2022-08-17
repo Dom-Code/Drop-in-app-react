@@ -35,13 +35,20 @@ function Nav({ click }) {
     and can no longer be used to gain access.
   */
 
+  function handleRefresh(e) {
+    e.preventDefault();
+    let home = document.querySelector('#verified-home');
+    home.click()
+  }
+
+
   return (
     <nav>
-      <a className="db dtc-c v-mid mid-gray link dim w-100 w-25-l tc tl-c mb4 mb0-l" href="/drop-in-app-react/user" title="Home">
+      <a className="db dtc-c v-mid mid-gray link dim w-100 w-25-l tc tl-c mb4 mb0-l" href="/" onClick={handleRefresh} title="Home">
         <img src={logo} className="dib w3 br-0" alt="Site Name" />
       </a>
       <div id="all-nav-items">
-        <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Home" onClick={click}>Home</p>
+        <p id="verified-home" className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Home" onClick={click}>Home</p>
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="How" onClick={click}>How it Works</p>
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Search" onClick={click}>Search Providers</p>
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Logout" onClick={logout}>Logout</p>

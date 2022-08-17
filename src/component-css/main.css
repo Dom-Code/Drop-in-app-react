@@ -14,26 +14,29 @@
   padding-top: 3%;
 }
 
-nav {
-  top: 10px;
-  text-align: center;
-  padding-top: 10px;
-  background-color: white;
-}
 
 #nav-container {
   display: block;
+  padding-top: 10px;
+  padding-bottom: 10px;
   width: 100%;
   position: relative;
   margin-left: auto;
   margin-right: auto;
-}
+  margin-top: 10px;
+  text-align: center;
 
+  background-color: white;
+}
 
 #scroll {
   position: relative;
   overflow:scroll;
   overflow-x:hidden;
+}
+
+#all-nav-items {
+
 }
 
 
