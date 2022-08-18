@@ -41,7 +41,7 @@ function VerifiedMain() {
       setLoading(true);
     } catch (err) {
       console.log(err);
-      navigate('/');
+      navigate('/Drop-in-app-react');
     }
   };
 

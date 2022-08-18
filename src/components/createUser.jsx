@@ -8,15 +8,15 @@ function CreateUser({ click }) {
 
   const [firstName, setFirstName] = useState('');
   const [validFirstName, setValidFirstName] = useState(true);
-  const [setFirstNameFocus] = useState(false);
+  const [firstNameFocus, setFirstNameFocus] = useState(false);
 
   const [lastName, setLastName] = useState('');
   const [validLastName, setValidLastName] = useState(false);
-  const [setLastNameFocus] = useState(false);
+  const [lastNameFocus, setLastNameFocus] = useState(false);
 
   const [email, setEmail] = useState('');
   const [validEmail, setValidEmail] = useState(false);
-  const [setEmailFocus] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
 
   const [pw, setPw] = useState('');
   const [validPw, setValidPw] = useState(false);
@@ -24,7 +24,7 @@ function CreateUser({ click }) {
 
   const [confirmPw, setConfirmPw] = useState('');
   const [validConfirmPw, setValidConfirmPw] = useState(false);
-  const [setConfirmPwFocus] = useState(false);
+  const [confirmPwFocus, setConfirmPwFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState('');
@@ -108,7 +108,7 @@ function CreateUser({ click }) {
         <section>
           <h1>Success!</h1>
           <p>
-            <a href="/">Sign In</a>
+            <a title="Login" href="/#" className="f6 blue underline link dib pl1 hover-light-blue" onClick={(click)}>Sign In</a>
           </p>
         </section>
       ) : (
