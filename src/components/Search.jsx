@@ -1,6 +1,5 @@
 import React from 'react';
 import Provider from './Provider';
-import Scroll from './Scroll';
 import FindBox from './FindBox';
 
 function Search({ click }) {
@@ -8,9 +7,7 @@ function Search({ click }) {
     <div>
       <h2>View our trusted providers</h2>
       <FindBox />
-      <Scroll>
         <Provider click={click} />
-      </Scroll>
     </div>
   );
 }

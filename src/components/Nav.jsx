@@ -21,7 +21,8 @@ function Nav({ click }) {
 
 /*
   The Nav component has several onClicks that capture the click event and passes it back to
-  main.js. main.js will then take that info and adjust accordingly.
+  main.js. main.js accepts this data and extracts the title attribute.
+  It will use the title attribute to determine which view to show.
 */
 
 export default Nav;

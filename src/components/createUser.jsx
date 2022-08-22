@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import '../component-css/createUser.css';
+import '../component-css/main.css';
 import axios from '../api/axios';
 
 function CreateUser({ click }) {
@@ -71,7 +71,8 @@ function CreateUser({ click }) {
       setErrMsg('Invalid Entry');
       return;
     }
-
+    
+    // if any of the entries fail, "Invalid entry" will appear
     try {
       const response = await axios.post(
         CREATEUSERURL,
@@ -83,13 +84,12 @@ function CreateUser({ click }) {
           withCredentials: false,
         },
       );
-      console.log(response);
       setSuccess(true);
       setFirstName('');
       setLastName('');
       setEmail('');
       setPw('');
-      // set state to empty srings.
+      // set states to empty srings.
     } catch (err) {
       if (!err.response) {
         setErrMsg('No Server Response');
@@ -111,6 +111,8 @@ function CreateUser({ click }) {
             <a title="Login" href="/#" className="f6 blue underline link dib pl1 hover-light-blue" onClick={(click)}>Sign In</a>
           </p>
         </section>
+  // If user registration is completed, success and login link will appear.
+  // If user registration fails, location of invalid entry will appear.
       ) : (
         <section id="signup-view">
           <p

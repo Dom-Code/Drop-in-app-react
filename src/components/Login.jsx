@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import '../component-css/login.css';
+import '../component-css/main.css';
 import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 
@@ -33,17 +33,23 @@ function Login({ click }) {
         },
       );
 
-      console.log(response);
       const { accessToken } = response.data;
       const { refreshToken } = response.data;
 
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
 
+
+      // if database accepts the login data, access and refresh
+      // tokens are saved in local storage.
+
       setEmail('');
       setPw('');
       setSuccess(true);
       navigate('/Drop-in-app-react/user');
+
+      // email and password contexts are set to an empty string.
+      
     } catch (err) {
       if (!err.response) {
         setErrMsg('No Server Response');

@@ -1,11 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import doc from '../images/doc.png';
-import ProvidersContext from './Contexts/ProvidersContext';
+import '../component-css/main.css';
 import DisplayProviders from './DisplayProviders';
-import '../component-css/providers.css';
+
+import useProviders from './hooks/useProviders';
+import useScroll from './hooks/useScroll';
 
 function Provider({ click }) {
-  const { providers } = useContext(ProvidersContext);
+  const { providers } = useProviders();
+  const { setScroll } = useScroll();
   const [cardVisibility, setCardVisibility] = useState(false);
   const [currentProvider, setCurrentProvider] = useState('');
 
@@ -17,6 +20,7 @@ function Provider({ click }) {
 
     setCurrentProvider(data);
     setCardVisibility(true);
+    setScroll(false);
   };
 
   // providerClick uses the event passed after the user clicks on a provider.
@@ -26,6 +30,7 @@ function Provider({ click }) {
     if (e.target.id === 'modal-wall') {
       setCardVisibility(false);
       setCurrentProvider('');
+      setScroll(true)
     }
   };
 
@@ -42,29 +47,22 @@ function Provider({ click }) {
         className={cardVisibility ? 'show' : 'offscreen'}
         onClick={(e) => hideCard(e)}
       >
-        <div id="card-box">
-          <h3>{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</h3>
-          <img alt="provider" src={doc} />
-          <div id="provider_data" className="tl pa4">
-            <p>
-              Specialty:
-              {currentProvider.specialty}
-            </p>
-            <p>
-              Location:
-              {currentProvider.city}
-            </p>
-            <p>
-              <a className="display-links" title="Login" href="/" onClick={click}>Sign in</a>
-              {' '}
-              or
-              {' '}
-              <a className="display-links" id="create" href="/" title="CreateUser" onClick={click}>Create an Account</a>
-              {' '}
-              to contact this provider
-            </p>
-          </div>
-        </div>
+        <section id="card-box">
+          <img id="doc-image" alt="provider" src={doc} />
+            <div id="provider_data">
+              <p id="provider-name">{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</p>
+              <p className='provider-details'>{currentProvider.specialty} </p>
+              <p className='provider-details'>{currentProvider.city} </p>
+              <p className='provider-details'>
+                <a className="display-links" title="Login" href="/" onClick={click}>Sign in</a>
+                {' '}
+                or
+                <a className="display-links" id="create" href="/" title="CreateUser" onClick={click}>Create an Account</a>
+                {' '}
+                to contact this provider
+              </p>
+            </div>
+        </section>
       </div>
       <DisplayProviders click={providerClick} />
     </div>

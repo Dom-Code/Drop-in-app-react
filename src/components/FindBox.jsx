@@ -1,9 +1,9 @@
 import React from 'react';
-import '../component-css/findBox.css';
+import '../component-css/main.css';
 
-import { useText } from './Contexts/textProvider';
+import useText from './hooks/useText';
 
-function FindBox(props) {
+function FindBox() {
   const { text, changeText } = useText();
 
   function newSearch(event) {
@@ -13,6 +13,10 @@ function FindBox(props) {
       changeText(event.target.value);
     }
   }
+
+// the text context is updated when a change occurs in the search bar.
+// Since backspace is not recognized by on change, i used `onKeyDown` 
+// and passed the event to newSearch if a backspace occurs.
 
   return (
     <form

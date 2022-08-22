@@ -1,13 +1,15 @@
 /* eslint-disable react/destructuring-assignment, react/jsx-filename-extension */
 import React, { useState } from 'react';
 import doc from '../../images/doc.png';
-import '../../component-css/providers.css';
+import '../../component-css/main.css';
 import useProviders from '../hooks/useProviders';
+import useScroll from '../hooks/useScroll';
 
-function VerifiedProvider(person) {
+function VerifiedProvider(scroll) {
   const { providers } = useProviders();
   const [cardVisibility, setCardVisibility] = useState(false);
   const [currentProvider, setCurrentProvider] = useState('');
+  const { setScroll } = useScroll()
 
   const providerClick = (e) => {
     const providerId = e.target.closest('section').getAttribute('id');
@@ -15,14 +17,18 @@ function VerifiedProvider(person) {
     const data = providers.filter((provider) => provider.id === +providerId)[0];
     setCurrentProvider(data);
     setCardVisibility(true);
+    setScroll(false);
   };
 
   const hideCard = (e) => {
     if (e.target.id === 'modal-wall') {
       setCardVisibility(false);
       setCurrentProvider('');
+      setScroll(true)
     }
   };
+
+  // setScroll argument is passed back to parent which ends in main. 
 
   return (
     <>
@@ -34,16 +40,14 @@ function VerifiedProvider(person) {
         >
 
           <div id="card-box">
-            <h3>{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</h3>
-            <img alt="provider" src={doc} />
-            <div id="provider_data">
-              <h5>
-                {currentProvider.city}
-                , CA
-              </h5>
-              <h5>{currentProvider.specialty}</h5>
-              <h5>Sorry, the provider you have selected is not currently accepting new patients.</h5>
-            </div>
+            <img id="doc-image" alt="provider" src={doc} />
+              <div id="provider_data">
+                <p id="provider-name">{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</p>
+                <p className='provider-details'>{currentProvider.specialty} </p>
+                <p className='provider-details'>{currentProvider.city} </p>
+                <p className='provider-details'>Sorry, the provider you have selected is not currently accepting new patients.</p>
+
+              </div>
           </div>
         </div>
       </div>

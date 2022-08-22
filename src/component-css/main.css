@@ -9,9 +9,9 @@
 
 #content {
   text-align: center;
-  position: relative;
   background-color: aliceblue;
   padding-top: 3%;
+
 }
 
 
@@ -59,30 +59,6 @@ a.disabled {
   cursor: default;
 }
 
-.display-links {
-  color: #CDECFF;
-}
-
-.display-links:hover {
-  color: lightblue;
-  filter: brightness(200%)
-}
-
-#provider-name-all-cards {
-  padding-left: auto;
-  padding-right: auto;
-  font-size: 1em;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-#all-providers {
-  padding-top: 10%;
-}
-
-.provider-data-all-cards {
-  font-size: .9em;
-}
 
 #create {
   margin-left: 5px;
@@ -115,4 +91,227 @@ a.disabled {
 
 #account-buttons {
   margin-top: 12%;
+  padding: 5%;
+}
+
+/* Provider cards */
+
+#card-box {
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+  color: #87898c;
+  position: absolute;
+  width: 70%;
+  height: 20%;
+  top: 0;
+  bottom: 20%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 7px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  max-width: 70%;
+  overflow: scroll;
+}
+
+#doc-image {
+  width: auto;
+  height: 60%;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 50%;
+  /* flex: 1; */
+}
+
+
+.display-links {
+  color: #479ace;
+  /* font-size: .90em; */
+}
+
+.display-links:hover {
+  color: rgb(0, 33, 218);
+  filter: brightness(200%)
+}
+
+/* all providers */
+
+#provider-name-all-cards {
+  padding-left: auto;
+  padding-right: auto;
+  font-size: 1em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+#all-providers {
+  padding-top: 10%;
+}
+
+.provider-data-all-cards {
+  font-size: .9em;
+}
+
+
+/* Provider cards */
+
+.offscreen {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+}
+
+.show {
+  position: absolute;
+    top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  visibility: visible;
+}
+
+#modal-wall {
+  position: fixed;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.person {
+  margin-top: 20px;
+  height: auto;
+  width: 200px;
+}
+
+.link {
+  color: #f8f8ff;
+  text-decoration: underline;
+}
+
+#provider_data {
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 80%;
+  /* flex: 1; */
+  text-align: left;
+  padding-left: 4%;
+  padding-top: 8%; 
+  padding-bottom: 2%;
+  /* margin: 0 */
+  /* border: 2px solid black; */
+}
+
+#provider-name {
+  color: black;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0;
+}
+
+.provider-details {
+  padding: 0;
+  margin: 0;
+  font-size: .80em;
+}
+
+
+.can-scroll {
+  overflow-y: scroll;
+  position: relative;
+
+}
+
+.cannot-scroll {
+  overflow: hidden;  
+  position: fixed;
+}
+
+
+
+/* Login */
+
+.button:hover {
+  color:blue;
+  opacity: .7;
+  transition: color .15s ease-in;
+}
+
+
+/* findox */
+
+#user-input {
+  margin-left: 5px;
+}
+
+#findbox-form {
+  margin-bottom: 10px;
+}
+
+
+/* createUser */
+
+.offscreen {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  right: -50px;
+  top: 50px;
+  /* color: blue */
+}
+
+.instructions {
+  position: relative;
+
+}
+
+.note {
+  font-size: 12px;
+  /* color:red; */
+  text-align: left;
+  color: red;
+}
+
+.mb2 {
+  overflow: hidden;
+  position: relative;
+}
+
+.errmsg {
+ color: red;
+ border: solid 2px pink;
+ padding: 8px;
+ border-radius: 7px;
+}
+
+.button {
+  border-radius: 6px;
+  color:#f8f8ff;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: none;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: .5rem;
+  margin-top: 2rem;
+  text-transform: uppercase;
+  background-color: #355c7d;
+}
+
+.button:hover {
+  color:white;
+  opacity: .7;
+  transition: color .15s ease-in;
 }

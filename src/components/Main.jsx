@@ -7,18 +7,23 @@ import Search from './Search';
 import Login from './Login';
 import CreateUser from './CreateUser';
 import Account from './Account';
-import { useText } from './Contexts/textProvider';
-import axios from '../api/axios';
-import ProvidersContext from './Contexts/ProvidersContext';
 import '../component-css/main.css';
+import axios from '../api/axios';
 import Spinner from './Spinner';
+
+import useText from './hooks/useText';
+import useScroll from './hooks/useScroll';
+import useProviders from './hooks/useProviders';
 
 function Main() {
   const [currentWindow, changeWindow] = useState('Home');
-  const [providers, changeProviders] = useState([]);
   const [prevList, setPrevList] = useState([]);
-  const { text, changeText } = useText();
   const [loading, setLoading] = useState(false);
+
+  const { changeProviders } = useProviders()
+  const { scroll } = useScroll() 
+  const { text, changeText } = useText();
+
 
   function switchView(event) {
     event.preventDefault();
@@ -86,12 +91,7 @@ function Main() {
         return <How />;
       case 'Search':
         return (
-          <ProvidersContext.Provider value={{
-            providers, changeProviders, text, changeText,
-          }}
-          >
             <Search click={(event) => switchView(event)} />
-          </ProvidersContext.Provider>
         );
       case 'Account':
         return <Account click={(event) => switchView(event)} />;
@@ -137,7 +137,7 @@ function Main() {
         <div id="nav-container">
           <Nav click={(event) => switchView(event)} />
         </div>
-        <div id="content" className="tc">
+        <div id="content" className={scroll? "can-scroll" : "cannot-scroll"}>
           {loading ? showView() : <Spinner />}
         </div>
       </div>

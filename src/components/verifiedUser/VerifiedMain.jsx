@@ -1,23 +1,30 @@
 import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import Footer from '../Footer';
 import VerifiedNav from './VerifiedNav';
 import VerfiedHome from './verifiedHome';
 import How from '../How';
 import VerifiedSearch from './VerifiedSearch';
-import useProviders from '../hooks/useProviders';
 import Spinner from '../Spinner';
-import { useText } from '../Contexts/textProvider';
+
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
+import useText from '../hooks/useText';
+import useProviders from '../hooks/useProviders';
+import useScroll from '../hooks/useScroll';
+import '../../component-css/main.css'
 
 function VerifiedMain() {
   const [currentWindow, changeWindow] = useState('Home');
-  const { changeProviders } = useProviders();
-  const { text, changeText } = useText();
   const [loading, setLoading] = useState(false);
   const [prevList, setPrevList] = useState([]);
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+
+  const { changeProviders } = useProviders();
+  const { text, changeText } = useText();
+  const { scroll } = useScroll();
+
+
 
   const switchView = (event) => {
     const windowName = event.target.title;
@@ -53,7 +60,7 @@ function VerifiedMain() {
         return <How />;
       case 'Search':
         return (
-          <VerifiedSearch values={{ text, changeText }} />
+          <VerifiedSearch/>
         );
       default:
     }
@@ -78,12 +85,13 @@ function VerifiedMain() {
     fetchProviders();
   }, []);
 
+
   return (
     <div id="main">
       <div id="nav-container">
         <VerifiedNav click={(event) => switchView(event)} />
       </div>
-      <div id="content" className="tc">
+      <div id="content" className={scroll? "can-scroll" : "cannot-scroll"}>
         {loading ? showView() : <Spinner />}
       </div>
       <div id="footer-container">

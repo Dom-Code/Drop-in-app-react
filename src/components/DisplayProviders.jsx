@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import doc from '../images/doc.png';
-import ProvidersContext from './Contexts/ProvidersContext';
+import useProviders from './hooks/useProviders';
 
 function DisplayProviders({ click }) {
-  const { providers } = useContext(ProvidersContext);
+  const { providers } = useProviders();
   const styles = {
     marginTop: '20px',
     height: 'auto',
@@ -27,6 +27,7 @@ function DisplayProviders({ click }) {
         <p className="provider-data-all-cards">{person.city}</p>
       </div>
     </section>
+    // We iterate over the providers array and dispaly each providers details
   ));
 }
 
