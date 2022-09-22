@@ -12,7 +12,6 @@ import axios from '../api/axios';
 import Spinner from './Spinner';
 
 import useText from './hooks/useText';
-import useScroll from './hooks/useScroll';
 import useProviders from './hooks/useProviders';
 
 function Main() {
@@ -21,9 +20,7 @@ function Main() {
   const [loading, setLoading] = useState(false);
 
   const { changeProviders } = useProviders()
-  const { scroll } = useScroll() 
   const { text, changeText } = useText();
-
 
   function switchView(event) {
     event.preventDefault();
@@ -90,9 +87,7 @@ function Main() {
       case 'How':
         return <How />;
       case 'Search':
-        return (
-            <Search click={(event) => switchView(event)} />
-        );
+        return <Search click={(event) => switchView(event)} />
       case 'Account':
         return <Account click={(event) => switchView(event)} />;
       case 'Login':
@@ -137,7 +132,7 @@ function Main() {
         <div id="nav-container">
           <Nav click={(event) => switchView(event)} />
         </div>
-        <div id="content" className={scroll? "can-scroll" : "cannot-scroll"}>
+        <div id="content">
           {loading ? showView() : <Spinner />}
         </div>
       </div>

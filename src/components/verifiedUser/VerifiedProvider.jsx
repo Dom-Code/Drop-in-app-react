@@ -5,7 +5,7 @@ import '../../component-css/main.css';
 import useProviders from '../hooks/useProviders';
 import useScroll from '../hooks/useScroll';
 
-function VerifiedProvider(scroll) {
+function VerifiedProvider() {
   const { providers } = useProviders();
   const [cardVisibility, setCardVisibility] = useState(false);
   const [currentProvider, setCurrentProvider] = useState('');
@@ -44,9 +44,12 @@ function VerifiedProvider(scroll) {
               <div id="provider_data">
                 <p id="provider-name">{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</p>
                 <p className='provider-details'>{currentProvider.specialty} </p>
-                <p className='provider-details'>{currentProvider.city} </p>
-                <p className='provider-details'>Sorry, the provider you have selected is not currently accepting new patients.</p>
-
+                <p className='provider-details'>{currentProvider.city} </p> 
+                <br/>
+                <p className='provider-details'>This provider is currently accepting patients.    
+                {" "}
+                <a href="/">Proceed with this provider?</a>
+                </p> 
               </div>
           </div>
         </div>
@@ -60,9 +63,9 @@ function VerifiedProvider(scroll) {
         >
           <img alt="provider" src={doc} />
           <div>
-            <h3>
+            <p id="provider-name-all-cards">
               {`${person.first_name} ${person.last_name} MD`}
-            </h3>
+            </p>
             <p>{person.specialty}</p>
           </div>
         </section>

@@ -11,7 +11,8 @@
   text-align: center;
   background-color: aliceblue;
   padding-top: 3%;
-
+  overflow-y: scroll;
+  position: relative;
 }
 
 
@@ -314,4 +315,12 @@ a.disabled {
   color:white;
   opacity: .7;
   transition: color .15s ease-in;
+}
+
+.green {
+  border: 5px solid green;
+}
+
+.red {
+  border-color: red;
 }

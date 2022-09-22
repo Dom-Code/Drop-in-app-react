@@ -7,23 +7,23 @@ function CreateUser({ click }) {
   const errRef = useRef();
 
   const [firstName, setFirstName] = useState('');
-  const [validFirstName, setValidFirstName] = useState(true);
+  const [validFirstName, setValidFirstName] = useState(null);
   const [firstNameFocus, setFirstNameFocus] = useState(false);
 
   const [lastName, setLastName] = useState('');
-  const [validLastName, setValidLastName] = useState(false);
+  const [validLastName, setValidLastName] = useState(null);
   const [lastNameFocus, setLastNameFocus] = useState(false);
 
   const [email, setEmail] = useState('');
-  const [validEmail, setValidEmail] = useState(false);
+  const [validEmail, setValidEmail] = useState(null);
   const [emailFocus, setEmailFocus] = useState(false);
 
   const [pw, setPw] = useState('');
-  const [validPw, setValidPw] = useState(false);
+  const [validPw, setValidPw] = useState(null);
   const [pwFocus, setPwFocus] = useState(false);
 
   const [confirmPw, setConfirmPw] = useState('');
-  const [validConfirmPw, setValidConfirmPw] = useState(false);
+  const [validConfirmPw, setValidConfirmPw] = useState(null);
   const [confirmPwFocus, setConfirmPwFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState('');
@@ -34,30 +34,63 @@ function CreateUser({ click }) {
   const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
   const CREATEUSERURL = '/api/register';
 
+
   useEffect(() => {
-    const result = regName.test(firstName);
-    setValidFirstName(result);
+      if (firstName.length === 0) {
+        setValidFirstName(null)
+      } else {
+        const result = regName.test(firstName);
+        setValidFirstName(result);
+      }
   }, [firstName]);
 
   useEffect(() => {
-    const result = regName.test(lastName);
-    setValidLastName(result);
+    if (lastName.length === 0) {
+      setValidLastName(null)
+    } else {
+      const result = regName.test(lastName);
+      setValidLastName(result);
+    }
   }, [lastName]);
 
   useEffect(() => {
-    const result = regEmail.test(email);
-    setValidEmail(result);
+    if (email.length === 0) {
+      setValidEmail(null);
+    } else {
+      const result = regEmail.test(email);
+      setValidEmail(result);
+    }
   }, [email]);
 
   useEffect(() => {
-    const result = regPassword.test(pw);
-    setValidPw(result);
+    if (pw.length === 0) {
+      setValidPw(null);
+    } else {
+      const result = regPassword.test(pw);
+      setValidPw(result);
+    }
   }, [pw]);
 
   useEffect(() => {
-    const result = validPw && (confirmPw === pw);
-    setValidConfirmPw(result);
+    if (confirmPw.length === 0) {
+      setValidConfirmPw(null);
+    } else {
+      const result = validPw && (confirmPw === pw);
+      setValidConfirmPw(result);
+    }
   }, [confirmPw]);
+
+
+  function validColor(item) {
+    if (item === null) {
+      return 'ba'
+    } else if (!item) {
+      return 'ba b--red bw2'
+    } else {
+      return 'ba b--green bw2'
+    }
+  }
+
 
   async function submitUser(e) {
     e.preventDefault();
@@ -74,7 +107,7 @@ function CreateUser({ click }) {
     
     // if any of the entries fail, "Invalid entry" will appear
     try {
-      const response = await axios.post(
+      await axios.post(
         CREATEUSERURL,
         JSON.stringify({
           firstName, lastName, email, pw,
@@ -97,6 +130,7 @@ function CreateUser({ click }) {
         setErrMsg('Email already exists');
       } else {
         setErrMsg('Registration Failed');
+        console.log(err)
       }
       errRef.current.focus();
     }
@@ -136,7 +170,7 @@ function CreateUser({ click }) {
                       type="text"
                       id="first_name"
                       ref={userRef}
-                      className="pa2 input-reset ba bg-transparent hover-bg-light-gray hover-black w-100 br2"
+                      className={`${validColor(validFirstName)} pa2 input-reset bg-transparent hover-bg-light-gray hover-black w-100 br2`}
                       autoComplete="off"
                       onChange={(e) => setFirstName(e.target.value)}
                       required
@@ -149,7 +183,7 @@ function CreateUser({ click }) {
 
                   <p
                     id="first-name-note"
-                    className={`note ${firstName && !validFirstName ? 'instructions' : 'offscreen'}`}
+                    className={`note ${firstNameFocus && !validFirstName ? 'instructions' : 'offscreen'}`}
                   >
                     First name must have 2 to 16 characters.
                     <br />
@@ -162,7 +196,7 @@ function CreateUser({ click }) {
                     Last Name
                     {' '}
                     <input
-                      className="pa2 input-reset ba bg-transparent hover-bg-light-gray hover-black w-100 br2"
+                      className={`${validColor(validLastName)} pa2 input-reset bg-transparent hover-bg-light-gray hover-black w-100 br2`}
                       type="text"
                       id="last_name"
                       ref={userRef}
@@ -179,7 +213,7 @@ function CreateUser({ click }) {
 
                   <p
                     id="last-name-note"
-                    className={`note ${lastName && !validLastName ? 'instructions' : 'offscreen'}`}
+                    className={`note ${lastNameFocus && !validLastName ? 'instructions' : 'offscreen'}`}
                   >
                     Last name must have 2 to 16 characters.
                     <br />
@@ -191,7 +225,7 @@ function CreateUser({ click }) {
                   <label className="db fw6 lh-copy f6 tl" htmlFor="email">
                     Email
                     <input
-                      className="pa2 input-reset ba bg-transparent hover-bg-light-gray hover-black w-100 br2"
+                      className={`${validColor(validEmail)} pa2 input-reset ba bg-transparent hover-bg-light-gray hover-black w-100 br2`}
                       type="email"
                       id="email"
                       ref={userRef}
@@ -207,9 +241,9 @@ function CreateUser({ click }) {
 
                   <p
                     id="email-note"
-                    className={`note ${email && !validEmail ? 'instructions' : 'offscreen'}`}
+                    className={`note ${emailFocus && !validEmail ? 'instructions' : 'offscreen'}`}
                   >
-                    Incorrect email format.
+                    Must be formatted correctly. John@Dropin.com
                     <br />
                   </p>
                 </div>
@@ -217,7 +251,7 @@ function CreateUser({ click }) {
                   <label className="db fw6 lh-copy f6 tl" htmlFor="pw">
                     Create Password
                     <input
-                      className="pa2 input-reset ba bg-transparent hover-bg-light-gray hover-black w-100 br2"
+                      className={`${validColor(validPw)} pa2 input-reset ba bg-transparent hover-bg-light-gray hover-black w-100 br2`}
                       type="password"
                       id="pw"
                       ref={userRef}
@@ -248,7 +282,7 @@ function CreateUser({ click }) {
                   <label className="db fw6 lh-copy f6 tl" htmlFor="pw_confirm">
                     Confirm Password
                     <input
-                      className="pa2 input-reset ba bg-transparent hover-bg-light-gray hover-black w-100 br2"
+                      className={`${validColor(validConfirmPw)} pa2 input-reset ba bg-transparent hover-bg-light-gray hover-black w-100 br2`}
                       type="password"
                       id="pw-confirm"
                       ref={userRef}
@@ -263,9 +297,9 @@ function CreateUser({ click }) {
 
                   <p
                     id="cPw-note"
-                    className={`note ${confirmPw && !validConfirmPw ? 'instructions' : 'offscreen'}`}
+                    className={`note ${confirmPwFocus && !validConfirmPw ? 'instructions' : 'offscreen'}`}
                   >
-                    Passwords do not match or invalid
+                    Must match Password
                     <br />
                   </p>
                 </div>
