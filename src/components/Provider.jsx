@@ -27,7 +27,7 @@ function Provider({ click }) {
   // The id is used to locate the provider in the providers array.
 
   const hideCard = (e) => {
-    if (e.target.id === 'modal-wall') {
+    if (e.target.id === 'modal') {
       setCardVisibility(false);
       setCurrentProvider('');
       setScroll(true)
@@ -37,31 +37,31 @@ function Provider({ click }) {
   /*
     hideCard will be invoked when the user clicks on the modal-wall, which is on the outside
     of the provider card. The card is hidden and the current provider variable is set to
-    and empty string.
+    and empty string. 
   */
 
   return (
     <div>
       <div
-        id="modal-wall"
-        className={cardVisibility ? 'show' : 'offscreen'}
+        id="modal"
+        className={`modal-wall ${cardVisibility ? 'show' : 'offscreen'}`}
         onClick={(e) => hideCard(e)}
       >
-        <section id="card-box">
-          <img id="doc-image" alt="provider" src={doc} />
-            <div id="provider_data">
-              <p id="provider-name">{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</p>
-              <p className='provider-details'>{currentProvider.specialty} </p>
-              <p className='provider-details'>{currentProvider.city} </p>
-              <p className='provider-details'>
-                <a className="display-links" title="Login" href="/" onClick={click}>Sign in</a>
-                {' '}
-                or
-                <a className="display-links" id="create" href="/" title="CreateUser" onClick={click}>Create an Account</a>
-                {' '}
-                to contact this provider
-              </p>
-            </div>
+        <section className="card-box">
+          <div><img id="doc-image" alt="provider" src={doc} /></div>
+          <div className="provider_data">
+            <p id="provider-name">{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</p>
+            <p className='provider-details'>{currentProvider.specialty} </p>
+            <p className='provider-details'>{currentProvider.city} </p>
+            <p className='provider-details'>
+              <a className="display-links" title="Login" href="/" onClick={click}>Sign in</a>
+              {' '}
+              or
+              <a className="display-links" id="create" href="/" title="CreateUser" onClick={click}>Create an Account</a>
+              {' '}
+              to contact this provider
+            </p>
+          </div>
         </section>
       </div>
       <DisplayProviders click={providerClick} />

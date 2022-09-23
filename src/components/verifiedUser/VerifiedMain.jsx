@@ -5,18 +5,21 @@ import VerifiedNav from './VerifiedNav';
 import VerfiedHome from './verifiedHome';
 import How from '../How';
 import VerifiedSearch from './VerifiedSearch';
+import VerifiedMessage from './VerifiedMessage';
 import Spinner from '../Spinner';
 
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import useText from '../hooks/useText';
 import useProviders from '../hooks/useProviders';
 import useScroll from '../hooks/useScroll';
-import '../../component-css/main.css'
+import '../../component-css/main.css';
+import RequestSubmitted from './RequestSubmitted';
 
 function VerifiedMain() {
   const [currentWindow, changeWindow] = useState('Home');
   const [loading, setLoading] = useState(false);
   const [prevList, setPrevList] = useState([]);
+  const [chosenProvider, setChosenProvider] = useState('');
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
 
@@ -24,13 +27,9 @@ function VerifiedMain() {
   const { text, changeText } = useText();
   const { scroll } = useScroll();
 
-
-
-  const switchView = (event) => {
-    const windowName = event.target.title;
-    if (windowName === currentWindow) {
-      changeWindow(currentWindow);
-    } else {
+  const switchView = (windowName, providerId) => {
+    setChosenProvider(providerId || null);
+    if (windowName !== currentWindow) {
       changeWindow(windowName);
     }
     const userInput = document.querySelector('#user-input');
@@ -60,8 +59,12 @@ function VerifiedMain() {
         return <How />;
       case 'Search':
         return (
-          <VerifiedSearch/>
+          <VerifiedSearch click={(e, id) => switchView(e, id)} />
         );
+      case 'message':
+        return <VerifiedMessage chosen={chosenProvider} switchView={switchView} />;
+      case 'Submitted':
+        return <RequestSubmitted />;
       default:
     }
   };
@@ -85,13 +88,12 @@ function VerifiedMain() {
     fetchProviders();
   }, []);
 
-
   return (
     <div id="main">
       <div id="nav-container">
         <VerifiedNav click={(event) => switchView(event)} />
       </div>
-      <div id="content" className={scroll? "can-scroll" : "cannot-scroll"}>
+      <div id="content" className={scroll ? 'can-scroll' : 'cannot-scroll'}>
         {loading ? showView() : <Spinner />}
       </div>
       <div id="footer-container">

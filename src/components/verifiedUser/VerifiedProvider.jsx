@@ -5,11 +5,16 @@ import '../../component-css/main.css';
 import useProviders from '../hooks/useProviders';
 import useScroll from '../hooks/useScroll';
 
-function VerifiedProvider() {
+function VerifiedProvider({ click }) {
   const { providers } = useProviders();
   const [cardVisibility, setCardVisibility] = useState(false);
   const [currentProvider, setCurrentProvider] = useState('');
-  const { setScroll } = useScroll()
+  const { setScroll } = useScroll();
+
+  const proceed = (e) => {
+    e.preventDefault();
+    click(e.target.title, currentProvider.id);
+  };
 
   const providerClick = (e) => {
     const providerId = e.target.closest('section').getAttribute('id');
@@ -21,37 +26,44 @@ function VerifiedProvider() {
   };
 
   const hideCard = (e) => {
-    if (e.target.id === 'modal-wall') {
+    if (e.target.id === 'modal') {
       setCardVisibility(false);
       setCurrentProvider('');
-      setScroll(true)
+      setScroll(true);
     }
   };
 
-  // setScroll argument is passed back to parent which ends in main. 
+  // setScroll argument is passed back to parent which ends in main.
 
   return (
     <>
       <div>
         <div
-          id="modal-wall"
-          className={cardVisibility ? 'show' : 'offscreen'}
+          id="modal"
+          className={`modal-wall ${cardVisibility ? 'show' : 'offscreen'}`}
           onClick={(e) => hideCard(e)}
         >
 
-          <div id="card-box">
-            <img id="doc-image" alt="provider" src={doc} />
-              <div id="provider_data">
-                <p id="provider-name">{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</p>
-                <p className='provider-details'>{currentProvider.specialty} </p>
-                <p className='provider-details'>{currentProvider.city} </p> 
-                <br/>
-                <p className='provider-details'>This provider is currently accepting patients.    
-                {" "}
-                <a href="/">Proceed with this provider?</a>
-                </p> 
-              </div>
-          </div>
+          <section className="card-box">
+            <div><img id="doc-image" alt="provider" src={doc} /></div>
+            <div className="provider_data">
+              <p id="provider-name">{`${currentProvider.first_name} ${currentProvider.last_name} MD`}</p>
+              <p className="provider-details">
+                {currentProvider.specialty}
+                {' '}
+              </p>
+              <p className="provider-details">
+                {currentProvider.city}
+                {' '}
+              </p>
+              <br />
+              <p className="provider-details">
+                This provider is currently accepting patients.
+                {' '}
+                <a href="/" title="message" onClick={(e) => proceed(e)}>Proceed with this provider?</a>
+              </p>
+            </div>
+          </section>
         </div>
       </div>
       {providers.map((person) => (

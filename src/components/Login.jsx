@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import '../component-css/main.css';
 import { useNavigate } from 'react-router-dom';
+import useUser from './hooks/useUser';
 import axios from '../api/axios';
 
 const LOGIN_URL = '/api/auth';
@@ -8,6 +9,8 @@ const LOGIN_URL = '/api/auth';
 function Login({ click }) {
   const userRef = useRef();
   const errRef = useRef();
+
+  const { setId } = useUser();
 
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
@@ -35,10 +38,11 @@ function Login({ click }) {
 
       const { accessToken } = response.data;
       const { refreshToken } = response.data;
+      const { userId } = response.data;
+      setId(userId);
 
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-
 
       // if database accepts the login data, access and refresh
       // tokens are saved in local storage.
@@ -49,7 +53,6 @@ function Login({ click }) {
       navigate('/Drop-in-app-react/user');
 
       // email and password contexts are set to an empty string.
-      
     } catch (err) {
       if (!err.response) {
         setErrMsg('No Server Response');

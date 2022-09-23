@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { TextProvider } from './components/Contexts/TextProvider';
 import { ProviderFunc } from './components/Contexts/ProvidersContext';
 import { ScrollProvider } from './components/Contexts/ScrollProvider';
+import { User } from './components/Contexts/UserData';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +17,9 @@ root.render(
       <ProviderFunc>
         <TextProvider>
           <ScrollProvider>
-            <App />
+            <User>
+              <App />
+            </User>
           </ScrollProvider>
         </TextProvider>
       </ProviderFunc>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
-import logo from '../../images/logo.png'
+import logo from '../../images/logo.png';
 
 function Nav({ click }) {
   const navigate = useNavigate();
@@ -25,6 +25,10 @@ function Nav({ click }) {
     }
   };
 
+  function onClick(e) {
+    click(e.target.title);
+  }
+
   /*
     The refresh token is taken from our localStorage and is assigned to the
     Authorization header. We then send this request to the servers API.
@@ -37,10 +41,9 @@ function Nav({ click }) {
 
   function handleRefresh(e) {
     e.preventDefault();
-    let home = document.querySelector('#verified-home');
-    home.click()
+    const home = document.querySelector('#verified-home');
+    home.click();
   }
-
 
   return (
     <nav>
@@ -48,9 +51,9 @@ function Nav({ click }) {
         <img src={logo} className="dib w3 br-0" alt="Site Name" />
       </a>
       <div id="all-nav-items">
-        <p id="verified-home" className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Home" onClick={click}>Home</p>
-        <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="How" onClick={click}>How it Works</p>
-        <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Search" onClick={click}>Search Providers</p>
+        <p id="verified-home" className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Home" onClick={onClick}>Home</p>
+        <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="How" onClick={onClick}>How it Works</p>
+        <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Search" onClick={onClick}>Search Providers</p>
         <p className="link dim dark-gray f6 f5-l dib mr3 mr4-l" title="Logout" onClick={logout}>Logout</p>
       </div>
     </nav>
